@@ -2,7 +2,7 @@
 
 🚀 This web application is built by React & Next.js and varnished by TailwindCSS. You will find both a mobile and desktop version in light and dark mode color schemes for each page. The api is provided by [REST Countries API](https://restcountries.eu).
 
-A demo of this application is available [here](https://react-countries.vercel.app).
+A demo of this application is available [here](https://react-countries-seven.vercel.app).
 
 ### Features
 
@@ -60,6 +60,7 @@ Open http://localhost:8080 with your favorite browser to see your project.
     ├── pages     # Next.js pages
     └── styles    # CSS files
 ```
+
 ### Deploy to production
 
 You can see the results locally in production mode with:
