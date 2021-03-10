@@ -1,4 +1,4 @@
-import { Validator } from "../utils/validators.model";
+import { Validator } from "../../utils/validators.model";
 
 export const CHANGE = "CHANGE";
 export const TOUCH = "TOUCH";
