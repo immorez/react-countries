@@ -1,12 +1,8 @@
-# Boilerplate and Starter for Next JS 10+, Tailwind CSS 2.0 and TypeScript
+# Where in the world? By React & Next.js
 
-<p align="center">
-  <a href="https://creativedesignsguru.com/demo/Nextjs-Boilerplate/"><img src="public/assets/images/nextjs-starter-banner.png?raw=true" alt="Next js starter banner"></a>
-</p>
+🚀 This web application is built by React & Next.js and varnished by TailwindCSS. You will find both a mobile and desktop version in light and dark mode color schemes for each page. The api is provided by [REST Countries API](https://restcountries.eu).
 
-🚀 Boilerplate and Starter for Next.js, Tailwind CSS and TypeScript ⚡️ Made with developer experience first: [Next.js](https://nextjs.org), [TypeScript](https://www.typescriptlang.org), [ESLint](https://eslint.org), [Prettier](https://prettier.io), [PostCSS](https://postcss.org), [Tailwind CSS](https://tailwindcss.com).
-
-Clone this project and use it to create your own [Next.js](https://nextjs.org) project. You can check a [Next js templates demo](https://creativedesignsguru.com/demo/Nextjs-Boilerplate/).
+A demo of this application is available [here](https://react-countries.vercel.app).
 
 ### Features
 
@@ -44,8 +40,8 @@ Built-in feature from Next.js:
 Run the following command on your local environment:
 
 ```
-git clone --depth=1 https://github.com/ixartz/Next-js-Boilerplate.git my-project-name
-cd my-project-name
+git clone https://github.com/qadamgahiii/react-countries.git
+cd react-countries
 npm install
 ```
 
@@ -64,14 +60,6 @@ Open http://localhost:8080 with your favorite browser to see your project.
     ├── pages     # Next.js pages
     └── styles    # CSS files
 ```
-
-### Customization
-
-You can easily configure Next js Boilerplate. Please change the following file:
-
-- `public/apple-touch-icon.png`, `public/favicon.ico`, `public/favicon-16x16.png` and `public/favicon-32x32.png`: your blog favicon, you can generate from https://favicon.io/favicon-converter/
-- `src/styles/main.css`: your blog CSS file using Tailwind CSS
-
 ### Deploy to production
 
 You can see the results locally in production mode with:
@@ -90,25 +78,3 @@ npm run build-prod
 ```
 
 Now, your blog is ready to be deployed. All generated files are located at `dist` folder, which you can deploy with any hosting service.
-
-### Deploy to Netlify
-
-Clone this repository on own GitHub account and deploy to Netlify:
-
-[![Netlify Deploy button](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/ixartz/Next-js-Boilerplate)
-
-### Contributions
-
-Everyone is welcome to contribute to this project. Feel free to open an issue if you have question or found a bug.
-
-### License
-
-Licensed under the MIT License, Copyright © 2020
-
-See [LICENSE](LICENSE) for more information.
-
----
-
-Made with ♥ by [CreativeDesignsGuru](https://creativedesignsguru.com)
-
-[![Sponsor Next JS Boilerplate](https://cdn.buymeacoffee.com/buttons/default-red.png)](https://www.buymeacoffee.com/ixartz)

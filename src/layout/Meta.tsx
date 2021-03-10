@@ -1,9 +1,9 @@
-import React from 'react';
+import React from "react";
 
-import { NextSeo } from 'next-seo';
-import Head from 'next/head';
+import { NextSeo } from "next-seo";
+import Head from "next/head";
 
-import { Config } from '../utils/Config';
+import { Config } from "../utils/Config";
 
 type IMetaProps = {
   title: string;
@@ -15,7 +15,11 @@ const Meta = (props: IMetaProps) => (
   <>
     <Head>
       <meta charSet="UTF-8" />
-      <meta name="viewport" content="width=device-width,initial-scale=1" key="viewport" />
+      <meta
+        name="viewport"
+        content="width=device-width,initial-scale=1"
+        key="viewport"
+      />
       <link
         rel="apple-touch-icon"
         href={`${process.env.baseUrl}/apple-touch-icon.png`}
@@ -35,7 +39,11 @@ const Meta = (props: IMetaProps) => (
         href={`${process.env.baseUrl}/favicon-16x16.png`}
         key="icon16"
       />
-      <link rel="icon" href={`${process.env.baseUrl}/favicon.ico`} key="favicon" />
+      <link
+        rel="icon"
+        href={`${process.env.baseUrl}/favicon.ico`}
+        key="favicon"
+      />
     </Head>
     <NextSeo
       title={props.title}
@@ -46,7 +54,7 @@ const Meta = (props: IMetaProps) => (
         description: props.description,
         url: props.canonical,
         locale: Config.locale,
-        site_name: Config.site_name,
+        site_name: Config.site_name
       }}
     />
   </>

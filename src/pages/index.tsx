@@ -1,216 +1,142 @@
-import React from 'react';
+import React, { useCallback, useEffect, useState } from "react";
+import { HiChevronDown, HiSearch, HiX } from "react-icons/hi";
+import Input from "../components/FormElements/Input";
+import Button from "../components/UI/Button/Button";
+import Tooltip from "../components/UI/Tooltip/Tooltip";
+import { useForm } from "../hooks/useForm";
+import { Meta } from "../layout/Meta";
+import { Main } from "../templates/Main";
+import CountriesList from "../components/sections/CountriesList/CountriesList";
+import { fetcher } from "../utils/fetcher";
+import { ICountryItemProps } from "../components/sections/CountriesList/CountryItem";
+import useSWR from "swr";
+import Fuse from "fuse.js";
+import { VALIDATOR_REQUIRE } from "../utils/validators";
 
-import { Meta } from '../layout/Meta';
-import { Main } from '../templates/Main';
+const Index = ({ countries }: { countries: ICountryItemProps[] }) => {
+  const [formState, inputHandler] = useForm(
+    { search: { value: "", isValid: false } },
+    false
+  );
+  const [region, setRegion] = useState<string | null>(null);
+  const [searchedCountries, setSearchedCountries] = useState<{}[]>([]);
+  const { data: filteredCountries, error } = useSWR(
+    region !== null ? `region/${region}` : null,
+    fetcher
+  );
 
-const Index = () => (
-  <Main
-    meta={(
-      <Meta
-        title="Next.js Boilerplate Presentation"
-        description="Next js Boilerplate is the perfect starer code for your project. Build your React application with Next.js framework."
+  const regionFilterHandler = useCallback((region: string) => {
+    setRegion(region);
+  }, []);
+
+  const cancelFilterHandler = useCallback(() => {
+    setRegion(null);
+  }, []);
+
+  useEffect(() => {
+    const options = {
+      keys: ["name", "alpha3Code", "alpha2Code"]
+    };
+
+    const fuse = new Fuse(countries, options);
+
+    const result = fuse.search(formState.inputs.search?.value as string);
+    const searchedCountries = result.map((r) => r.item);
+    setSearchedCountries(searchedCountries);
+  }, [formState.inputs]);
+
+  return (
+    <Main
+      meta={
+        <Meta
+          title="Where in the world?"
+          description="This application provides full information about all the countries around the world."
+        />
+      }>
+      <div className="flex md:flex-row flex-col w-full md:justify-between space-y-2">
+        <Input
+          element="input"
+          type="text"
+          id="search"
+          className="py-4 pl-16 md:w-96 w-full bg-white dark:bg-darkBlue placeholder-secondaryDarkBlue dark:placeholder-white font-semibold text-sm"
+          icon={<HiSearch className="text-xl mt-4 ml-6 text-gray-400" />}
+          placeholder="Search for a country..."
+          validators={[VALIDATOR_REQUIRE()]}
+          onInput={inputHandler}
+        />
+        {/* //TODO: make this clickable */}
+        <Tooltip
+          holder={
+            <Button className="p-4 w-64 bg-white dark:bg-darkBlue shadow-md flex flex-row justify-between rounded-lg">
+              <p className="font-semibold text-sm">
+                {region === null ? "Filter by Region" : region}
+              </p>{" "}
+              {region === null ? (
+                <HiChevronDown className="my-auto mx-2" />
+              ) : filteredCountries && !error ? (
+                <HiX onClick={cancelFilterHandler} className="my-auto mx-2" />
+              ) : (
+                <p>...</p>
+              )}
+            </Button>
+          }
+          content={
+            <ul className="bg-white dark:bg-darkBlue shadow-md p-4 rounded-lg w-64 text-sm font-semibold my-1">
+              <li
+                onClick={() => regionFilterHandler("Africa")}
+                className="my-2 px-4 cursor-pointer hover:bg-lightGray py-2">
+                Africa
+              </li>
+              <li
+                onClick={() => regionFilterHandler("Europe")}
+                className="my-2 px-4 cursor-pointer hover:bg-lightGray py-2">
+                Europe
+              </li>
+              <li
+                onClick={() => regionFilterHandler("Americas")}
+                className="my-2 px-4 cursor-pointer hover:bg-lightGray py-2">
+                Americas
+              </li>
+              <li
+                onClick={() => regionFilterHandler("Asia")}
+                className="my-2 px-4 cursor-pointer hover:bg-lightGray py-2">
+                Asia
+              </li>
+              <li
+                onClick={() => regionFilterHandler("Oceania")}
+                className="my-2 px-4 cursor-pointer hover:bg-lightGray py-2">
+                Oceania
+              </li>
+            </ul>
+          }
+          position="bottom-start"
+        />
+      </div>
+      <CountriesList
+        countries={
+          searchedCountries.length > 0
+            ? searchedCountries
+            : region !== null && filteredCountries && !error
+            ? filteredCountries
+            : countries
+        }
       />
-    )}
-  >
-    <a href="https://github.com/ixartz/Next-js-Boilerplate">
-      <img
-        src={`${process.env.baseUrl}/assets/images/nextjs-starter-banner.png`}
-        alt="Nextjs starter banner"
-      />
-    </a>
-    <h1 className="font-bold text-2xl">
-      Boilerplate code for your Nextjs project with Tailwind CSS
-    </h1>
-    <p>
-      <span role="img" aria-label="rocket">
-        🚀
-      </span>
-      {' '}
-      Next.js Boilerplate is a starter code for your Next js project by putting developer experience
-      first .
-      {' '}
-      <span role="img" aria-label="zap">
-        ⚡️
-      </span>
-      {' '}
-      Made with
-      {' '}
-      <a href="https://nextjs.org" rel="nofollow">
-        Next.js
-      </a>
-      ,
-      {' '}
-      <a href="https://eslint.org" rel="nofollow">
-        ESLint
-      </a>
-      ,
-      {' '}
-      <a href="https://prettier.io" rel="nofollow">
-        Prettier
-      </a>
-      ,
-      {' '}
-      <a href="https://postcss.org" rel="nofollow">
-        PostCSS
-      </a>
-      ,
-      {' '}
-      <a href="https://tailwindcss.com" rel="nofollow">
-        Tailwind CSS
-      </a>
-      .
-    </p>
-    <h2 className="font-semibold text-lg">Next js Boilerplate Features</h2>
-    <p>Developer experience first:</p>
-    <ul>
-      <li>
-        <span role="img" aria-label="fire">
-          🔥
-        </span>
-        {' '}
-        <a href="https://nextjs.org" rel="nofollow">
-          Next.js
-        </a>
-        {' '}
-        for Static Site Generator
-      </li>
-      <li>
-        <span role="img" aria-label="art">
-          🎨
-        </span>
-        {' '}
-        Integrate with
-        {' '}
-        <a href="https://tailwindcss.com" rel="nofollow">
-          Tailwind CSS
-        </a>
-      </li>
-      <li>
-        <span role="img" aria-label="nail_care">
-          💅
-        </span>
-        {' '}
-        <a href="https://postcss.org" rel="nofollow">
-          PostCSS
-        </a>
-        {' '}
-        for processing
-        {' '}
-        <a href="https://tailwindcss.com" rel="nofollow">
-          Tailwind CSS
-        </a>
-      </li>
-      <li>
-        <span role="img" aria-label="tada">
-          🎉
-        </span>
-        {' '}
-        Type checking Typescript
-      </li>
-      <li>
-        <span role="img" aria-label="pencil2">
-          ✏️
-        </span>
-        {' '}
-        Linter with
-        {' '}
-        <a href="https://eslint.org" rel="nofollow">
-          ESLint
-        </a>
-      </li>
-      <li>
-        <span role="img" aria-label="hammer_and_wrench">
-          🛠
-        </span>
-        {' '}
-        Code Formatter with
-        {' '}
-        <a href="https://prettier.io" rel="nofollow">
-          Prettier
-        </a>
-      </li>
-      <li>
-        <span role="img" aria-label="fox_face">
-          🦊
-        </span>
-        {' '}
-        SEO metadata,
-        {' '}
-        <a
-          href="https://developers.google.com/search/docs/guides/intro-structured-data"
-          rel="nofollow"
-        >
-          JSON-LD
-        </a>
-        {' '}
-        and
-        {' '}
-        <a href="https://ogp.me/" rel="nofollow">
-          Open Graph
-        </a>
-        {' '}
-        tags with
-        {' '}
-        <a href="https://github.com/garmeeh/next-seo">Next SEO</a>
-      </li>
-      <li>
-        <span role="img" aria-label="rainbow">
-          🌈
-        </span>
-        {' '}
-        Include a FREE minimalist theme
-      </li>
-      <li>
-        <span role="img" aria-label="hundred">
-          💯
-        </span>
-        {' '}
-        Maximize lighthouse score
-      </li>
-    </ul>
-    <p>Built-in feature from Next.js:</p>
-    <ul>
-      <li>
-        <span role="img" aria-label="coffee">
-          ☕
-        </span>
-        {' '}
-        Minify HTML &amp; CSS
-      </li>
-      <li>
-        <span role="img" aria-label="dash">
-          💨
-        </span>
-        {' '}
-        Live reload
-      </li>
-      <li>
-        <span role="img" aria-label="white_check_mark">
-          ✅
-        </span>
-        {' '}
-        Cache busting
-      </li>
-    </ul>
-    <h2 className="font-semibold text-lg">Our Stater code Philosophy</h2>
-    <ul>
-      <li>Minimal code</li>
-      <li>SEO-friendly</li>
-      <li>
-        <span role="img" aria-label="rocket">
-          🚀
-        </span>
-        {' '}
-        Production-ready
-      </li>
-    </ul>
-    <p>
-      Check our GitHub project for more information about
-      {' '}
-      <a href="https://github.com/ixartz/Next-js-Boilerplate">Nextjs Boilerplate</a>
-      .
-    </p>
-  </Main>
-);
+    </Main>
+  );
+};
+
+export async function getServerSideProps() {
+  const data = await fetcher("all");
+
+  if (!data) {
+    return {
+      notFound: true
+    };
+  }
+
+  return {
+    props: { countries: data } // will be passed to the page component as props
+  };
+}
 
 export default Index;

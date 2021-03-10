@@ -1,38 +1,67 @@
 {
-  "plugins": ["@typescript-eslint"],
-  "extends": ["airbnb-typescript"],
-  "parserOptions": {
-    "project": "./tsconfig.json"
+  "parser": "@typescript-eslint/parser",
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "plugin:react-hooks/recommended",
+    "react-app"
+  ],
+  "plugins": ["@typescript-eslint", "jest", "react", "prettier", "react-hooks"],
+  "env": {
+    "es6": true,
+    "browser": true,
+    "jest": true,
+    "node": true
   },
   "rules": {
-    "react/destructuring-assignment": "off", // Vscode doesn't support automatically destructuring, it's a pain to add a new variable
-    "jsx-a11y/anchor-is-valid": "off", // Next.js use his own internal link system
-    "react/require-default-props": "off", // Allow non-defined react props as undefined
-    "import/order": [
-      "error",
+    "import/prefer-default-export": "off",
+    "react/prop-types": "off",
+    "import/no-cycle": "off",
+    "no-multi-assign": "off",
+    "react/button-has-type": "off",
+    "jsx-a11y/click-events-have-key-events": "off",
+    "jsx-a11y/no-static-element-interactions": "off",
+    "react/jsx-props-no-spreading": "off",
+    "react-hooks/rules-of-hooks": "error", // added "react-hooks/rules-of-hooks"
+    "react-hooks/exhaustive-deps": "warn",
+    "@typescript-eslint/no-unused-vars": "warn",
+    "no-unused-vars": "off",
+    "object-shorthand": "off",
+    "react/display-name": "off",
+    "react/jsx-filename-extension": [
+      1,
       {
-        "groups": ["builtin", "external", "internal"],
-        "pathGroups": [
-          {
-            "pattern": "react",
-            "group": "external",
-            "position": "before"
-          }
-        ],
-        "pathGroupsExcludedImportTypes": ["react"],
-        "newlines-between": "always",
-        "alphabetize": {
-          "order": "asc",
-          "caseInsensitive": true
-        }
+        "extensions": [".js", ".jsx", ".ts", ".tsx"]
       }
     ],
-    "import/prefer-default-export": "off",
-    "@typescript-eslint/no-unused-vars": [
-      "error",
+    "quotes": [
+      2,
+      "double",
       {
-        "argsIgnorePattern": "^_"
+        "avoidEscape": true
       }
-    ]
+    ],
+    "semi": ["error", "never"],
+    "prettier/prettier": ["error", {}, { "usePrettierrc": true }] // Use our .prettierrc file as source
+  },
+  "settings": {
+    "import/parsers": {
+      "@typescript-eslint/parser": [".js", ".jsx", ".ts", ".tsx"]
+    },
+    "import/resolver": {
+      "babel-module": {},
+      "typescript": {}
+    },
+    "react": {
+      "version": "detect"
+    }
+  },
+  "parserOptions": {
+    // Allows for the parsing of modern ECMAScript features
+    "ecmaVersion": 2018,
+    // Allows for the use of imports
+    "sourceType": "module",
+    // https://blog.geographer.fr/eslint-parser-services, https://www.robertcooper.me/using-eslint-and-prettier-in-a-typescript-project
+    "project": "./tsconfig.json"
   }
 }

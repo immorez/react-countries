@@ -1,6 +1,7 @@
 export const Config = {
-  site_name: 'Starter',
-  title: 'Nextjs Starter',
-  description: 'Starter code for your Nextjs Boilerplate with Tailwind CSS',
+  site_name: 'React Countries',
+  title: 'Where in the world?',
+  description:
+    'This application provides full information about all the countries around the world.',
   locale: 'en',
 };
