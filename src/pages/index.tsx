@@ -43,7 +43,7 @@ const Index = ({ countries }: { countries: ICountryItemProps[] }) => {
     const result = fuse.search(formState.inputs.search?.value as string);
     const searchedCountries = result.map((r) => r.item);
     setSearchedCountries(searchedCountries);
-  }, [formState.inputs]);
+  }, [formState.inputs, countries]);
 
   return (
     <Main

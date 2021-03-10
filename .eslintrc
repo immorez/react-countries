@@ -41,7 +41,6 @@
         "avoidEscape": true
       }
     ],
-    "semi": ["error", "never"],
     "prettier/prettier": ["error", {}, { "usePrettierrc": true }] // Use our .prettierrc file as source
   },
   "settings": {

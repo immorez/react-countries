@@ -16,7 +16,7 @@ const Header: React.FC = () => {
 
   const navigateToHome = useCallback(() => {
     router.push("/");
-  }, []);
+  }, [router]);
 
   return (
     <div className="flex md:flex-row flex-col justify-between py-6 px-16 shadow-sm bg-white dark:bg-darkBlue">

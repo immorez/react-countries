@@ -40,7 +40,7 @@ const Details = (props: IDetailsProps) => {
 
   const navigateBack = useCallback(() => {
     router.back();
-  }, []);
+  }, [router]);
 
   const DATA_STRUCTURE = [
     { id: 1, key: "Native Name", value: nativeName },
@@ -89,6 +89,7 @@ const Details = (props: IDetailsProps) => {
             <img
               className="md:max-w-xl w-full h-full object-cover mx-auto"
               src={flag}
+              alt={name}
             />
           </div>
           <div className="md:w-1/2 w-full flex flex-col space-y-8">

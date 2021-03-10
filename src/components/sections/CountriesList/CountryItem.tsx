@@ -31,7 +31,7 @@ const CountryItem = (props: ICountryItemProps) => {
 
   const navigateToDetails = useCallback(() => {
     router.push(`/details/${alpha3Code!.toLowerCase()}`);
-  }, []);
+  }, [router, alpha3Code]);
 
   return (
     <li
