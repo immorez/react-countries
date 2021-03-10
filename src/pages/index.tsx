@@ -64,53 +64,47 @@ const Index = ({ countries }: { countries: ICountryItemProps[] }) => {
           validators={[VALIDATOR_REQUIRE()]}
           onInput={inputHandler}
         />
-        {/* //TODO: make this clickable */}
-        <Tooltip
-          holder={
-            <Button className="p-4 w-64 bg-white dark:bg-darkBlue shadow-md flex flex-row justify-between rounded-lg">
-              <p className="font-semibold text-sm">
-                {region === null ? "Filter by Region" : region}
-              </p>{" "}
-              {region === null ? (
-                <HiChevronDown className="my-auto mx-2" />
-              ) : filteredCountries && !error ? (
-                <HiX onClick={cancelFilterHandler} className="my-auto mx-2" />
-              ) : (
-                <p>...</p>
-              )}
-            </Button>
-          }
-          content={
-            <ul className="bg-white dark:bg-darkBlue shadow-md p-4 rounded-lg w-64 text-sm font-semibold my-1">
-              <li
-                onClick={() => regionFilterHandler("Africa")}
-                className="my-2 px-4 cursor-pointer hover:bg-lightGray py-2">
-                Africa
-              </li>
-              <li
-                onClick={() => regionFilterHandler("Europe")}
-                className="my-2 px-4 cursor-pointer hover:bg-lightGray py-2">
-                Europe
-              </li>
-              <li
-                onClick={() => regionFilterHandler("Americas")}
-                className="my-2 px-4 cursor-pointer hover:bg-lightGray py-2">
-                Americas
-              </li>
-              <li
-                onClick={() => regionFilterHandler("Asia")}
-                className="my-2 px-4 cursor-pointer hover:bg-lightGray py-2">
-                Asia
-              </li>
-              <li
-                onClick={() => regionFilterHandler("Oceania")}
-                className="my-2 px-4 cursor-pointer hover:bg-lightGray py-2">
-                Oceania
-              </li>
-            </ul>
-          }
-          position="bottom-start"
-        />
+        <div className="dropdown inline-block relative p-1">
+          <Button className="p-4 w-64 bg-white dark:bg-darkBlue shadow-md flex flex-row justify-between rounded-lg">
+            <p className="font-semibold text-sm">
+              {region === null ? "Filter by Region" : region}
+            </p>{" "}
+            {region === null ? (
+              <HiChevronDown className="my-auto mx-2" />
+            ) : filteredCountries && !error ? (
+              <HiX onClick={cancelFilterHandler} className="my-auto mx-2" />
+            ) : (
+              <p>...</p>
+            )}
+          </Button>
+          <ul className="hidden bg-white dark:bg-darkBlue shadow-md p-4 rounded-lg w-64 text-sm font-semibold my-1 dropdown-menu absolute">
+            <li
+              onClick={() => regionFilterHandler("Africa")}
+              className="my-2 px-4 cursor-pointer hover:bg-lightGray py-2">
+              Africa
+            </li>
+            <li
+              onClick={() => regionFilterHandler("Europe")}
+              className="my-2 px-4 cursor-pointer hover:bg-lightGray py-2">
+              Europe
+            </li>
+            <li
+              onClick={() => regionFilterHandler("Americas")}
+              className="my-2 px-4 cursor-pointer hover:bg-lightGray py-2">
+              Americas
+            </li>
+            <li
+              onClick={() => regionFilterHandler("Asia")}
+              className="my-2 px-4 cursor-pointer hover:bg-lightGray py-2">
+              Asia
+            </li>
+            <li
+              onClick={() => regionFilterHandler("Oceania")}
+              className="my-2 px-4 cursor-pointer hover:bg-lightGray py-2">
+              Oceania
+            </li>
+          </ul>
+        </div>
       </div>
       <CountriesList
         countries={
