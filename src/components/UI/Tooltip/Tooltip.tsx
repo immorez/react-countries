@@ -25,14 +25,12 @@ const Tooltip = (props: TooltipProps) => {
   };
 
   return (
-    <div
-      {...attributes.popper}
-      onMouseEnter={openTooltip}
-      onMouseLeave={closeTooltip}>
+    <div {...attributes.popper} onMouseEnter={openTooltip}>
       <div ref={referenceRef}>{props.holder}</div>
 
       <div
         style={styles.popper}
+        onMouseLeave={closeTooltip}
         className={`${!tooltipShow ? "hidden" : "block"} z-50`}
         ref={popperRef}>
         <div className="flex flex-col">
