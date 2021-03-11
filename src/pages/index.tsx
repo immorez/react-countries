@@ -2,7 +2,6 @@ import React, { useCallback, useEffect, useState } from "react";
 import { HiChevronDown, HiSearch, HiX } from "react-icons/hi";
 import Input from "../components/FormElements/Input";
 import Button from "../components/UI/Button/Button";
-import Tooltip from "../components/UI/Tooltip/Tooltip";
 import { useForm } from "../hooks/useForm";
 import { Meta } from "../layout/Meta";
 import { Main } from "../templates/Main";
