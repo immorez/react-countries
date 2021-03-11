@@ -45,7 +45,7 @@ const Details = (props: IDetailsProps) => {
   const DATA_STRUCTURE = [
     { id: 1, key: "Native Name", value: nativeName },
     { id: 2, key: "Population", value: population },
-    { id: 3, key: "Region", value: region },
+    { id: 3, key: "Region", value: region ? region : "" },
     { id: 4, key: "Sub Region", value: subregion },
     { id: 5, key: "Capital", value: capital },
     { id: 6, key: "Top Level Domain", value: topLevelDomain },
