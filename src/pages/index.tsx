@@ -63,7 +63,7 @@ const Index = ({ countries }: { countries: ICountryItemProps[] }) => {
           validators={[VALIDATOR_REQUIRE()]}
           onInput={inputHandler}
         />
-        <div className="dropdown inline-block relative p-1">
+        <div className="dropdown inline-block relative p-2">
           <Button className="p-4 w-64 bg-white dark:bg-darkBlue shadow-md flex flex-row justify-between rounded-lg">
             <p className="font-semibold text-sm">
               {region === null ? "Filter by Region" : region}
